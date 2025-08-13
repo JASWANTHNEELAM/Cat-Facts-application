@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}History • Cat Facts{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>Saved Cat Facts (Newest first)</h1>
+
+    <form method="get" class="search">
+      <input type="text" name="q" placeholder="Search facts..." value="{{ q|e }}" />
+      <button class="btn" type="submit">Search</button>
+      {% if q %}
+        <a class="btn btn-ghost" href="{{ url_for('history') }}">Clear</a>
+      {% endif %}
+    </form>
+
+    {% if facts %}
+      <ul class="list">
+        {% for row in facts %}
+          <li class="list-item">
+            <div class="fact">{{ row['fact'] }}</div>
+            <div class="date muted">{{ row['created_at'] }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No facts yet. Go back to the home page and fetch a few!</p>
+    {% endif %}
+  </section>
+{% endblock %}

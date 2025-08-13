@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}Cat Facts{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a href="{{ url_for('index') }}">🐱 Cat Facts</a>
+      <a href="{{ url_for('history') }}">📜 History</a>
+    </nav>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container muted">
+    Built with Flask • Study Mode demo
+  </footer>
+</body>
+</html>

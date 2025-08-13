@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Cat Facts{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>Random Cat Fact</h1>
+    <div id="fact" class="fact">Loading a fact...</div>
+    <button id="newFactBtn" class="btn">New Fact</button>
+    <p class="muted">This page calls our Flask <code>/fact</code> endpoint, which fetches from the public API and stores it.</p>
+  </section>
+
+  <script>
+    async function loadFact() {
+      const factEl = document.getElementById('fact');
+      factEl.textContent = 'Loading...';
+      try {
+        const res = await fetch('/fact');
+        const data = await res.json();
+        factEl.textContent = data.fact || data.error || 'No fact available.';
+      } catch {
+        factEl.textContent = 'Network error. Please try again.';
+      }
+    }
+    document.getElementById('newFactBtn').addEventListener('click', loadFact);
+    loadFact();
+  </script>
+{% endblock %}
